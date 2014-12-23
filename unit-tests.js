@@ -135,6 +135,66 @@
   /* 
    * Binary Search Tree
   */
+  assert(true, '- Start: tree Tests - \n');
+  var bst = _ds.binarySearchTree();
+  bst.insert(10);
+  bst.insert(5);
+  bst.insert(1);
+  bst.insert(8);
+  bst.insert(7);
+  bst.insert(6);
+  bst.insert(20);
+  bst.insert(15);
+  bst.insert(23);
+  bst.insert(13);
+  bst.insert(18);
+  bst.insert(21);
+  bst.insert(30);
+
+  assert(true, '- After inserting values -');
+  assert(bst.findMin() === 1, '* findMin is correct');
+  assert(bst.findMax() === 30, '* findMax is correct');
+  assert(bst.getHeight() === 4, '* getHeight is correct');
+
+  assert(true, '- contains -');
+  assert(bst.contains(10) === true, '* contains is correct');
+  assert(bst.contains(2) === false, '* contains is correct');
+  assert(bst.contains(-1) === false, '* contains is correct');
+  assert(bst.contains(18) === true, '* contains is correct');
+  assert(bst.contains(100) === false, '* contains is correct');
+
+  // assert('breadthFirstSearch');
+  // breadthFirstSearch(bst.root);
+
+  // assert('depthFirstSearch - postorder');
+  // depthFirstSearch(bst.root);
+
+  assert(true, '- remove -');
+  bst.remove(30);
+  assert(bst.findMin() === 1, '* findMin is correct');
+  assert(bst.findMax() === 23, '* findMax is correct');
+  assert(bst.getHeight() === 4, '* getHeight is correct');
+
+  bst.remove(100);
+  assert(bst.findMin() === 1, '* findMin is correct');
+  assert(bst.findMax() === 23, '* findMax is correct');
+  assert(bst.getHeight() === 4, '* getHeight is correct');
+
+  bst.remove(1);
+  assert(bst.findMin() === 5, '* findMin is correct');
+  assert(bst.findMax() === 23, '* findMax is correct');
+  assert(bst.getHeight() === 4, '* getHeight is correct');
+
+  bst.remove(8);
+  assert(bst.findMin() === 5, '* findMin is correct');
+  assert(bst.findMax() === 23, '* findMax is correct');
+  assert(bst.getHeight() === 3, '* getHeight is correct');
+
+  bst.remove(20);
+  assert(bst.findMin() === 5, '* findMin is correct');
+  assert(bst.findMax() === 23, '* findMax is correct');
+  assert(bst.getHeight() === 3, '* getHeight is correct');
+  assert(true, '- End: tree Tests - \n');
 
   /* 
    * Graph
