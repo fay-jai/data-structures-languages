@@ -2,15 +2,16 @@
 
   var assert = function (expression, comment) {
     if (expression) {
-      console.log('\n');
       console.log(comment);
+    } else {
+      console.log('Test Failed!');
     }
   };
 
   /* 
    * Linked List
   */
-  assert(true, '- Start: linkedList Tests -');
+  assert(true, '- Start: linkedList Tests - \n');
   var ll = _ds.linkedList();
   assert(ll.head === null, '* ll.head is null');
   assert(ll.tail === null, '* ll.tail is null');
@@ -67,12 +68,37 @@
   assert(ll.removeFromHead() === void 0, '* removeFromHead correctly produces undefined');
   assert(ll.removeFromTail() === void 0, '* removeFromTail correctly produces undefined');
 
-  assert(true, '- End: linkedList Tests -');
+  assert(true, '- End: linkedList Tests - \n');
 
 
   /* 
    * Stack
   */
+  assert(true, '- Start: Stack Tests - \n');
+  var s = _ds.stack();
+  assert(s.isEmpty() === true, '* stack is empty');
+  assert(s.top() === void 0, '* stack does not have a top');
+
+  s.push(1);
+  assert(s.isEmpty() === false, '* stack is not empty');
+  assert(s.top() === 1, '* top is correct');
+
+  s.push(2);
+  assert(s.isEmpty() === false, '* stack is not empty');
+  assert(s.top() === 2, '* top is correct');
+
+  assert(s.pop() === 2, '* pop produces correct value');
+  assert(s.isEmpty() === false, '* stack is not empty');
+  assert(s.top() === 1, '* top is correct');
+
+  assert(s.pop() === 1, '* pop produces correct value');
+  assert(s.isEmpty() === true, '* stack is empty');
+  assert(s.top() === void 0, '* top is correct');
+
+  assert(s.pop() === void 0, '* pop produces correct value');
+  assert(s.isEmpty() === true, '* stack is empty');
+  assert(s.top() === void 0, '* top is correct');
+  assert(true, '- End: Stack Tests - \n');
 
   /* 
    * Queue
