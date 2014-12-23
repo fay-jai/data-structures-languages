@@ -67,7 +67,6 @@
   assert(ll2.tail === null, '* tail value is correct after removeFromTail');
   assert(ll.removeFromHead() === void 0, '* removeFromHead correctly produces undefined');
   assert(ll.removeFromTail() === void 0, '* removeFromTail correctly produces undefined');
-
   assert(true, '- End: linkedList Tests - \n');
 
 
@@ -103,6 +102,31 @@
   /* 
    * Queue
   */
+  assert(true, '- Start: Queue Tests - \n');
+  var q = _ds.queue();
+  assert(q.isEmpty() === true, '* queue is empty');
+  assert(q.peek() === void 0, '* peek is correct');
+
+  q.enqueue(1);
+  assert(q.isEmpty() === false, '* queue is not empty after enqueue');
+  assert(q.peek() === 1, '* peek produces correct value');
+
+  q.enqueue(2);
+  assert(q.isEmpty() === false, '* queue is not empty after enqueue');
+  assert(q.peek() === 1, '* peek produces correct value');
+
+  assert(q.dequeue() === 1, '* dequeue produces correct value');
+  assert(q.isEmpty() === false, '* queue is not empty');
+  assert(q.peek() === 2, '* peek produces correct value');
+
+  assert(q.dequeue() === 2, '* dequeue produces correct value');
+  assert(q.isEmpty() === true, '* queue is empty');
+  assert(q.peek() === void 0, '* peek produces correct value');
+
+  assert(q.dequeue() === void 0, '* dequeue produces correct value');
+  assert(q.isEmpty() === true, '* queue is empty');
+  assert(q.peek() === void 0, '* peek produces correct value');
+  assert(true, '- End: Queue Tests - \n');
 
   /* 
    * Tree
