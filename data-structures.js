@@ -26,7 +26,16 @@
     list.tail = null;
 
     list.addToHead = function (value) {
-
+      var newNode = makeNode(value);
+      // if empty, set head and tail to new node
+      if (list.isEmpty()) {
+        list.head = newNode;
+        list.tail = newNode;
+      } else {
+        // else, set newNode's next to head and then set head to newNode
+        newNode.next = list.head;
+        list.head = newNode;
+      }
     };
 
     list.addToTail = function (value) {
@@ -46,7 +55,7 @@
     };
 
     list.isEmpty = function () {
-
+      return list.head === null && list.tail === null;
     };
 
     return list;
