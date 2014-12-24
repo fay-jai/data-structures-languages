@@ -97,20 +97,20 @@
     list.contains = function (value, node) {
       if (list.isEmpty()) {
         return false;
-      } else {
-        // initialize node
-        if (node === void 0) {
-          node = list.head;
-        }
+      }
 
-        // base case
-        if (node === null) {
-          return false;
-        } else if (node.value === value) {
-          return true;
-        } else {
-          return list.contains(value, node.next);
-        }
+      // initialize node
+      if (node === void 0) {
+        node = list.head;
+      }
+
+      // base case
+      if (node === null) {
+        return false;
+      } else if (node.value === value) {
+        return true;
+      } else {
+        return list.contains(value, node.next);
       }
     };
 
