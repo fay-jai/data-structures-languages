@@ -2,11 +2,22 @@
   var _ds = {};
 
   var makeNode = function (value) {
+    var node = {
+      value : value,
+      next  : null
+    };
 
+    return node;
   };
 
-  var treeNode = function (value) {
+  var binaryTreeNode = function (value) {
+    var node = {
+      value : value,
+      left  : null,
+      right : null
+    };
 
+    return node;
   };
 
   _ds.linkedList = function () {
