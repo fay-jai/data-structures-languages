@@ -21,7 +21,35 @@
   };
 
   _ds.linkedList = function () {
+    var list = {};
+    list.head = null;
+    list.tail = null;
 
+    list.addToHead = function (value) {
+
+    };
+
+    list.addToTail = function (value) {
+
+    };
+
+    list.removeFromHead = function () {
+
+    };
+
+    list.removeFromTail = function () {
+
+    };
+
+    list.contains = function (value, node) {
+
+    };
+
+    list.isEmpty = function () {
+
+    };
+
+    return list;
   };
 
   _ds.stack = function () {
