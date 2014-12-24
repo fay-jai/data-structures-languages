@@ -50,15 +50,68 @@
     };
 
     list.removeFromHead = function () {
+      var result;
+      if (!list.isEmpty()) {
+        result = list.head.value;
 
+        // edge case where there's only one element in linked list
+        if (list.head === list.tail) {
+          list.head = null;
+          list.tail = null;
+        } else {
+          list.head = list.head.next;
+        }
+
+        return result;
+      }
     };
 
     list.removeFromTail = function () {
+      var node, result;
 
+      if (!list.isEmpty()) {
+        result = list.tail.value;
+
+        if (list.head === list.tail) {
+          list.head = null;
+          list.tail = null;
+        } else {
+          /*
+           * because this is a singly linked list with no access
+           * to the previous node, will need to iterate through
+           * all nodes and find the node prior to the tail
+          */
+          node = list.head;
+          while (node.next.next !== null) {
+            node = node.next;
+          }
+          // when loop breaks, node will be pointing to the node prior to tail
+          list.tail      = node;
+          list.tail.next = null;
+        }
+
+        return result;
+      }
     };
 
     list.contains = function (value, node) {
+      if (list.isEmpty()) {
+        return false;
+      } else {
+        // initialize node
+        if (node === void 0) {
+          node = list.head;
+        }
 
+        // base case
+        if (node === null) {
+          return false;
+        } else if (node.value === value) {
+          return true;
+        } else {
+          return list.contains(value, node.next);
+        }
+      }
     };
 
     list.isEmpty = function () {
