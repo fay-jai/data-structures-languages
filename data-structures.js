@@ -122,7 +122,33 @@
   };
 
   _ds.stack = function () {
+    var s       = {},
+        storage = {},
+        top     = -1;
 
+    s.push = function (value) {
+      top         += 1;
+      storage[top] = value;
+    };
+
+    s.pop = function () {
+      var result;
+      if (!s.isEmpty()) {
+        result = storage[top];
+        top   -= 1;
+        return result;
+      }
+    };
+
+    s.top = function () {
+      return storage[top];
+    };
+
+    s.isEmpty = function () {
+      return top === -1;
+    };
+
+    return s;
   };
 
   _ds.queue = function () {
