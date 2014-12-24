@@ -34,12 +34,19 @@
       } else {
         // else, set newNode's next to head and then set head to newNode
         newNode.next = list.head;
-        list.head = newNode;
+        list.head    = newNode;
       }
     };
 
     list.addToTail = function (value) {
-
+      var newNode = makeNode(value);
+      if (list.isEmpty()) {
+        list.head = newNode;
+        list.tail = newNode;
+      } else {
+        list.tail.next = newNode;
+        list.tail      = newNode;
+      }
     };
 
     list.removeFromHead = function () {
