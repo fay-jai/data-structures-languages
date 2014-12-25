@@ -122,30 +122,31 @@
   };
 
   _ds.stack = function () {
-    var s       = {},
-        storage = {},
-        top     = -1;
+    var s       = {};
+    var storage = {};
+    var size    = 0;
 
     s.push = function (value) {
-      top         += 1;
-      storage[top] = value;
+      storage[size] = value;
+      size += 1;
     };
 
     s.pop = function () {
       var result;
       if (!s.isEmpty()) {
-        result = storage[top];
-        top   -= 1;
+        result = storage[size - 1];
+        delete storage[size - 1];
+        size -= 1;
         return result;
       }
     };
 
     s.top = function () {
-      return storage[top];
+      return storage[size - 1];
     };
 
     s.isEmpty = function () {
-      return top === -1;
+      return size <= 0;
     };
 
     return s;
