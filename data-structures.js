@@ -152,7 +152,38 @@
   };
 
   _ds.queue = function () {
+    var q       = {},
+        storage = {},
+        start   = -1,
+        end     = -1;
 
+    q.enqueue = function (value) {
+      end         += 1;
+      storage[end] = value;
+    };
+
+    q.dequeue = function () {
+      var result;
+
+      if (!q.isEmpty()) {
+        start += 1;
+        result = storage[start];
+
+        return result;
+      }
+    };
+
+    q.peek = function () {
+      if (!q.isEmpty()) {
+        return storage[start + 1]; // the start index is always the one before the actual data remaining
+      }
+    };
+
+    q.isEmpty = function () {
+      return start >= end;
+    };
+
+    return q;
   };
 
   _ds.tree = function () {
