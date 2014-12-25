@@ -153,30 +153,28 @@
   };
 
   _ds.queue = function () {
-    var q       = {},
-        storage = {},
-        start   = -1,
-        end     = -1;
+    var q       = {};
+    var storage = {};
+    var start   = 0;
+    var end     = 0;
 
     q.enqueue = function (value) {
-      end         += 1;
       storage[end] = value;
+      end += 1;
     };
 
     q.dequeue = function () {
       var result;
-
       if (!q.isEmpty()) {
-        start += 1;
         result = storage[start];
-
+        start += 1;
         return result;
       }
     };
 
     q.peek = function () {
       if (!q.isEmpty()) {
-        return storage[start + 1]; // the start index is always the one before the actual data remaining
+        return storage[start];
       }
     };
 
