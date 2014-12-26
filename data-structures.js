@@ -363,12 +363,34 @@
 
   };
 
-  _tt.depthFirstSearch = function (tree) {
+  _tt.depthFirstSearch = function (treeNode) {
 
   };
 
-  _tt.breadthFirstSearch = function (tree) {
+  _tt.breadthFirstSearch = function (treeNode, fn) {
+    // assume treeNode is a valid node
 
+    var q, node;
+    fn = fn || function (x) { console.log(x); };
+
+    // create a queue
+    q = _ds.queue();
+    q.enqueue(treeNode);
+
+    while (!q.isEmpty()) {
+      // process first item in queue
+      node = q.dequeue();
+      fn(node.value);
+
+      // add children onto queue
+      if (node.left) {
+        q.enqueue(node.left);
+      }
+
+      if (node.right) {
+        q.enqueue(node.right);
+      }
+    }
   };
 
   global._ds = _ds;
