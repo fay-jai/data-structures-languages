@@ -228,8 +228,32 @@
       return 'pointer to root node';
     };
 
-    bst.contains = function (value) {
+    bst.contains = function (value, node) {
+      if (bst.isEmpty()) {
+        return false;
+      } else {
+        // initialize node
+        if (node === void 0) {
+          node = bst.root;
+        }
 
+        if (value === node.value) {
+          return true;
+        } else if (value < node.value) {
+          // check if node is leaf node
+          if (node.left === null) {
+            return false;
+          } else {
+            return bst.contains(value, node.left);
+          }
+        } else {
+          if (node.right === null) {
+            return false;
+          } else {
+            return bst.contains(value, node.right);
+          }
+        }
+      }
     };
 
     bst.findMin = function () {
