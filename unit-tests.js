@@ -197,8 +197,33 @@
   assert(true, '- End: tree Tests - \n');
 
   /* 
+   * Hash Table
+  */
+  assert(true, '- Start: hashTable Tests - \n');
+  var hash = _ds.hashTable(8);
+
+  hash.insert('hello', 'world');
+  assert(hash.retrieve('hello') === 'world', '* Retrieving passed');
+
+  hash.insert('hello', 'jello');
+  assert(hash.retrieve('hello') === 'jello', '* Insertion of same value overwrites previous value');
+
+  hash.insert('yellow', 'bellow');
+  assert(hash.retrieve('yellow') === 'bellow', '* Insertion passed');
+  assert(hash.retrieve('hello') === 'jello', '* Multiple values can be inserted without overwriting each other');
+
+  hash.remove('hello');
+  assert(hash.retrieve('hello') === void 0, '* Value successfully removed');
+  assert(hash.retrieve('yellow') === 'bellow', '* Removing value doesn\'t impact other values');
+
+  hash.remove('yellow');
+  assert(hash.retrieve('hello') === void 0, '* Value successfully removed');
+  assert(hash.retrieve('yellow') === void 0, '* Value successfully removed');
+
+  assert(true, '- end: hashTable Tests - \n');
+
+  /*
    * Graph
   */
-
 
 })(_ds);
