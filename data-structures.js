@@ -284,8 +284,24 @@
       }
     };
 
-    bst.getHeight = function () {
+    bst.getHeight = function (node) {
+      if (!bst.isEmpty()) {
+        // initialize node
+        if (node === void 0) {
+          node = bst.root;
+        }
 
+        // base case of leaf node
+        if (node.left === null && node.right === null) {
+          return 0;
+        } else if (node.left === null) {
+          return 1 + bst.getHeight(node.right);
+        } else if (node.right === null) {
+          return 1 + bst.getHeight(node.left);
+        } else {
+          return 1 + Math.max( bst.getHeight(node.left), bst.getHeight(node.right) );
+        }
+      }
     };
 
     bst.isEmpty = function () {
