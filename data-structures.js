@@ -257,11 +257,31 @@
     };
 
     bst.findMin = function () {
+      // min value is always the left most leaf node
 
+      var node;
+      if (!bst.isEmpty()) {
+        node = bst.root;
+        while (node.left !== null) {
+          node = node.left;
+        }
+        // at this point, node.left is pointing to null
+        return node.value;
+      }
     };
 
     bst.findMax = function () {
+      // max value is always the right most leaf node
 
+      var node;
+      if (!bst.isEmpty()) {
+        node = bst.root;
+        while (node.right !== null) {
+          node = node.right;
+        }
+        // at this point, node.right is pointing to null
+        return node.value;
+      }
     };
 
     bst.getHeight = function () {
