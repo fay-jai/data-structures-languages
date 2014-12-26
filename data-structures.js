@@ -190,7 +190,38 @@
   };
 
   _ds.binarySearchTree = function () {
+    var bst = {};
+    bst.root = null;
 
+    bst.insert = function (value) {
+
+    };
+
+    bst.remove = function () {
+      return 'pointer to root node';
+    };
+
+    bst.contains = function (value) {
+
+    };
+
+    bst.findMin = function () {
+
+    };
+
+    bst.findMax = function () {
+
+    };
+
+    bst.getHeight = function () {
+
+    };
+
+    bst.isEmpty = function () {
+      return bst.root === null;
+    };
+
+    return bst;
   };
 
   _ds.graph = function () {
