@@ -163,11 +163,11 @@
   assert(bst.contains(18) === true, '* contains is correct');
   assert(bst.contains(100) === false, '* contains is correct');
 
-  // assert('breadthFirstSearch');
-  // breadthFirstSearch(bst.root);
+  assert('breadthFirstSearch');
+  _tt.breadthFirstSearch(bst.root);
 
-  // assert('depthFirstSearch - postorder');
-  // depthFirstSearch(bst.root);
+  assert('depthFirstSearch - postorder');
+  _tt.depthFirstSearch(bst.root);
 
   assert(true, '- remove -');
   bst.remove(30);

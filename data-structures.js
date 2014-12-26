@@ -1,5 +1,6 @@
 (function (global) {
   var _ds = {};
+  var _tt = {};
 
   var makeNode = function (value) {
     var node = {
@@ -362,5 +363,14 @@
 
   };
 
+  _tt.depthFirstSearch = function (tree) {
+
+  };
+
+  _tt.breadthFirstSearch = function (tree) {
+
+  };
+
   global._ds = _ds;
+  global._tt = _tt;
 })(window);
