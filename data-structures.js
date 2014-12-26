@@ -374,7 +374,30 @@
     };
 
     h.insert = function (key, value) {
+      // Get idx of where [key, value] array should be stored within storage object
+      var idx = hashFunction(key, arrayLimit);
 
+      /*
+       * Create bucket variable and set it to the array that
+       * exists at storage[idx] or a new empty array.
+       * Bucket is an array of arrays.
+      */
+      var bucket = storage[idx] || [];
+
+      // Check whether 'key' already exists in bucket
+      for (var i = 0; i < bucket.length; i += 1) {
+        // If it does, modify existing value with new 'value'
+        if (bucket[i][0] === key) {
+          bucket[i][1] = value;
+          return;
+        }
+      }
+
+      // Since key doesn't already exist, push [key, value] into bucket
+      bucket.push( [key, value] );
+
+      // This rebinding is necessary because bucket could be a new array
+      storage[idx] = bucket;
     };
 
     h.retrieve = function (key) {
