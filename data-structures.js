@@ -238,6 +238,13 @@
           if (node.left !== null) {
             node.left = bst.remove(value, node.left);
           }
+
+          /*
+           * The other scenario that can happen here is that node.left === null.
+           * In this case, that means the value we're searching for can't be
+           * found in the tree. Since we're always returning a pointer to a node,
+           * we're just simply returning the node at line 270.
+          */
         } else if (value > node.value) {
           // check if there are any node's to the right of current node
           if (node.right !== null) {
