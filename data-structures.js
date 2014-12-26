@@ -185,52 +185,6 @@
     return q;
   };
 
-
-  // Alternate Queue implementation
-  // _ds.queue = function () {
-  //   var q       = {},
-  //       storage = {},
-  //       start   = -1,
-  //       end     = -1;
-
-  //   q.enqueue = function (value) {
-  //     if (q.isEmpty()) {
-  //       start = 0;
-  //       end   = 0;
-  //     } else {
-  //       end         += 1;
-  //     }
-  //     storage[end] = value;
-  //   };
-
-  //   q.dequeue = function () {
-  //     var result;
-
-  //     if (!q.isEmpty()) {
-  //       result = storage[start];
-  //       if (start === end) {
-  //         start = -1;
-  //         end   = -1;
-  //       } else {
-  //         start += 1;
-  //       }
-  //       return result;
-  //     }
-  //   };
-
-  //   q.peek = function () {
-  //     if (!q.isEmpty()) {
-  //       return storage[start];
-  //     }
-  //   };
-
-  //   q.isEmpty = function () {
-  //     return start === -1 && end === -1;
-  //   };
-
-  //   return q;
-  // };
-
   _ds.tree = function () {
 
   };
