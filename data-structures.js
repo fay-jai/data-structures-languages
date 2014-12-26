@@ -412,7 +412,18 @@
     };
 
     h.remove = function (key) {
+      var idx    = hashFunction(key, arrayLimit);
+      var bucket = storage[idx];
 
+      // Check whether bucket exists
+      if (bucket) {
+        for (var i = 0; i < bucket.length; i += 1) {
+          if (bucket[i][0] === key) {
+            bucket.splice(i, 1);
+            break;
+          }
+        }
+      }
     };
 
     return h;
