@@ -401,7 +401,14 @@
     };
 
     h.retrieve = function (key) {
+      var idx    = hashFunction(key, arrayLimit);
+      var bucket = storage[idx] || [];
 
+      for (var i = 0; i < bucket.length; i += 1) {
+        if (bucket[i][0] === key) {
+          return bucket[i][1];
+        }
+      }
     };
 
     h.remove = function (key) {
