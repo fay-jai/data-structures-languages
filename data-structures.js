@@ -224,8 +224,44 @@
       }
     };
 
-    bst.remove = function () {
-      return 'pointer to root node';
+    bst.remove = function (value, node) {
+      var minValue;
+
+      if (!bst.isEmpty()) {
+        // initialize node
+        if (node === void 0) {
+          node = bst.root;
+        }
+
+        if (value < node.value) {
+          // check if there are any node's to the left of current node
+          if (node.left !== null) {
+            node.left = bst.remove(value, node.left);
+          }
+        } else if (value > node.value) {
+          // check if there are any node's to the right of current node
+          if (node.right !== null) {
+            node.right = bst.remove(value, node.right);
+          }
+        } else {
+          // node.value === value
+
+          // check if current node is leaf node
+          if (node.left === null && node.right === null) {
+            node = null;
+          } else if (node.left === null) {
+            node = node.right;
+          } else if (node.right === null) {
+            node = node.left;
+          } else {
+            minValue = bst.findMin(node.right);
+            node.value = minValue;
+            node.right = bst.remove(minValue, node.right);
+          }
+        }
+
+        return node;
+      }
     };
 
     bst.contains = function (value, node) {
@@ -256,12 +292,14 @@
       }
     };
 
-    bst.findMin = function () {
+    bst.findMin = function (node) {
       // min value is always the left most leaf node
 
-      var node;
       if (!bst.isEmpty()) {
-        node = bst.root;
+        if (node === void 0) {
+          node = bst.root;
+        }
+
         while (node.left !== null) {
           node = node.left;
         }
@@ -270,12 +308,14 @@
       }
     };
 
-    bst.findMax = function () {
+    bst.findMax = function (node) {
       // max value is always the right most leaf node
 
-      var node;
       if (!bst.isEmpty()) {
-        node = bst.root;
+        if (node === void 0) {
+          node = bst.root;
+        }
+
         while (node.right !== null) {
           node = node.right;
         }
