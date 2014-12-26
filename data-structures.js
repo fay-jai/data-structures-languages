@@ -193,8 +193,35 @@
     var bst = {};
     bst.root = null;
 
-    bst.insert = function (value) {
+    bst.insert = function (value, node) {
+      var newNode = binaryTreeNode(value);
 
+      // check if root node is null
+      if (bst.isEmpty()) {
+        bst.root = newNode;
+        return;
+      }
+
+      // initialize node: node is either root node or node that's passed in
+      if (node === void 0) {
+        node = bst.root;
+      }
+
+      // compare node's value to value passed in
+      if (value <= node.value) {
+        // check if current node is a leaf node
+        if (node.left === null) {
+          node.left = newNode;
+        } else {
+          bst.insert(value, node.left);
+        }
+      } else {
+        if (node.right === null) {
+          node.right = newNode;
+        } else {
+          bst.insert(value, node.right);
+        }
+      }
     };
 
     bst.remove = function () {
