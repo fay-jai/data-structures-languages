@@ -363,8 +363,35 @@
 
   };
 
-  _tt.depthFirstSearch = function (treeNode) {
+  _tt.depthFirstSearch = function (treeNode, fn) {
+    fn = fn || function (x) { console.log(x); };
 
+    // Preorder
+    // fn(treeNode.value);
+    // if (treeNode.left) {
+    //   _tt.depthFirstSearch(treeNode.left, fn);
+    // }
+    // if (treeNode.right) {
+    //   _tt.depthFirstSearch(treeNode.right, fn);
+    // }
+
+    // Inorder
+    if (treeNode.left) {
+      _tt.depthFirstSearch(treeNode.left, fn);
+    }
+    fn(treeNode.value);
+    if (treeNode.right) {
+      _tt.depthFirstSearch(treeNode.right, fn);
+    }
+
+    // Postorder
+    // if (treeNode.left) {
+    //   _tt.depthFirstSearch(treeNode.left, fn);
+    // }
+    // if (treeNode.right) {
+    //   _tt.depthFirstSearch(treeNode.right, fn);
+    // }
+    // fn(treeNode.value);
   };
 
   _tt.breadthFirstSearch = function (treeNode, fn) {
