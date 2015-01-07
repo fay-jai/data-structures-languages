@@ -441,6 +441,60 @@
       g.numEdges += 1;
     };
 
+    g.depthFirstSearch = function (startingVertex, fn) {
+      // check if starting vertex is in list of vertices
+      var vFound = false;
+      fn = fn || function (value) { console.log( value ); };
+
+      for (var i = 0; i < g.vertex.length; i += 1) {
+        if ( g.vertex[i].value === startingVertex.value ) {
+          vFound = true;
+          break;
+        }
+      }
+
+      if ( vFound ) {
+        g.visited[ startingVertex.value ] = true;
+        for (var j = 0; j < g.edges[ startingVertex.value ].length; i += 1) {
+          var next = g.edges[ startingVertex.value ][j];
+          // hasn't been visited
+          if ( !g.visited[ next ] ) {
+            // get next vertex to visit
+              // var nextVertex;
+            // call depth first search on next vertex
+              // g.depthFirstSearch(  , fn );
+          }
+        }
+      } else {
+        throw new Error('Vertex is not in Graph');
+      }
+    };
+
+    g.breadthFirstSearch = function (startingVertex, fn) {
+      // requires a queue
+
+      // check if starting vertex is in list of vertices
+      var vFound = false;
+      fn = fn || function (value) { console.log( value ); };
+
+      for (var i = 0; i < g.vertex.length; i += 1) {
+        if ( g.vertex[i].value === startingVertex.value ) {
+          vFound = true;
+          break;
+        }
+      }
+
+      if ( vFound ) {
+
+      }
+    };
+
+    g.resetVisited = function () {
+      for ( var vertex in g.visited ) {
+        g.visited[ vertex ] = false;
+      }
+    };
+
     return g;
   };
 
