@@ -7,7 +7,6 @@
       value : value,
       next  : null
     };
-
     return node;
   };
 
@@ -17,7 +16,6 @@
       left  : null,
       right : null
     };
-
     return node;
   };
 
@@ -96,23 +94,15 @@
     };
 
     list.contains = function (value, node) {
-      if (list.isEmpty()) {
-        return false;
-      }
+      if (list.isEmpty()) return false;
 
       // initialize node
-      if (node === void 0) {
-        node = list.head;
-      }
+      if (node === void 0) node = list.head;
 
       // base case
-      if (node === null) {
-        return false;
-      } else if (node.value === value) {
-        return true;
-      } else {
-        return list.contains(value, node.next);
-      }
+      if (node === null) return false;
+      if (node.value === value) return true;
+      return list.contains(value, node.next);
     };
 
     list.isEmpty = function () {
@@ -174,9 +164,7 @@
     };
 
     q.peek = function () {
-      if (!q.isEmpty()) {
-        return storage[start];
-      }
+      if (!q.isEmpty()) return storage[start];
     };
 
     q.isEmpty = function () {
@@ -204,9 +192,7 @@
       }
 
       // initialize node: node is either root node or node that's passed in
-      if (node === void 0) {
-        node = bst.root;
-      }
+      if (node === void 0) node = bst.root;
 
       // compare node's value to value passed in
       if (value <= node.value) {
@@ -226,13 +212,11 @@
     };
 
     bst.remove = function (value, node) {
-      var minValue;
+      var minValue, leftValue, rightValue;
 
       if (!bst.isEmpty()) {
         // initialize node
-        if (node === void 0) {
-          node = bst.root;
-        }
+        if (node === void 0) node = bst.root;
 
         if (value < node.value) {
           // check if there are any node's to the left of current node
@@ -248,23 +232,31 @@
           */
         } else if (value > node.value) {
           // check if there are any node's to the right of current node
-          if (node.right !== null) {
-            node.right = bst.remove(value, node.right);
-          }
+          if (node.right !== null) node.right = bst.remove(value, node.right);
         } else {
           // node.value === value
 
           // check if current node is leaf node
           if (node.left === null && node.right === null) {
-            node = null;
+            if ( bst.getHeight( node ) === 0 ) {
+              bst.root = null;
+              return null;
+            } else {
+              node = null;
+            }
           } else if (node.left === null) {
-            node = node.right;
+            rightValue = node.right.value;
+            node.value = rightValue;
+            node.right = bst.remove( rightValue, node.right );
           } else if (node.right === null) {
+            leftValue  = node.left.value;
+            node.value = leftValue;
+            node.left  = bst.remove( leftValue, node.left );
             node = node.left;
           } else {
-            minValue = bst.findMin(node.right);
+            minValue   = bst.findMin(node.right);
             node.value = minValue;
-            node.right = bst.remove(minValue, node.right);
+            node.right = bst.remove( minValue, node.right );
           }
         }
 
@@ -273,40 +265,24 @@
     };
 
     bst.contains = function (value, node) {
-      if (bst.isEmpty()) {
-        return false;
-      } else {
-        // initialize node
-        if (node === void 0) {
-          node = bst.root;
-        }
+      if ( bst.isEmpty() ) return false;
 
-        if (value === node.value) {
-          return true;
-        } else if (value < node.value) {
-          // check if node is leaf node
-          if (node.left === null) {
-            return false;
-          } else {
-            return bst.contains(value, node.left);
-          }
-        } else {
-          if (node.right === null) {
-            return false;
-          } else {
-            return bst.contains(value, node.right);
-          }
-        }
+      // initialize node
+      if (node === void 0) node = bst.root;
+
+      if (value === node.value) return true;
+      if (value < node.value) {
+        // check if node is leaf node
+        return node.left === null ? false : bst.contains(value, node.left);
+      } else {
+        return node.right === null ? false : bst.contains(value, node.right);
       }
     };
 
     bst.findMin = function (node) {
       // min value is always the left most leaf node
-
       if (!bst.isEmpty()) {
-        if (node === void 0) {
-          node = bst.root;
-        }
+        if (node === void 0) node = bst.root;
 
         while (node.left !== null) {
           node = node.left;
@@ -318,11 +294,8 @@
 
     bst.findMax = function (node) {
       // max value is always the right most leaf node
-
       if (!bst.isEmpty()) {
-        if (node === void 0) {
-          node = bst.root;
-        }
+        if (node === void 0) node = bst.root;
 
         while (node.right !== null) {
           node = node.right;
@@ -335,20 +308,13 @@
     bst.getHeight = function (node) {
       if (!bst.isEmpty()) {
         // initialize node
-        if (node === void 0) {
-          node = bst.root;
-        }
+        if (node === void 0) node = bst.root;
 
         // base case of leaf node
-        if (node.left === null && node.right === null) {
-          return 0;
-        } else if (node.left === null) {
-          return 1 + bst.getHeight(node.right);
-        } else if (node.right === null) {
-          return 1 + bst.getHeight(node.left);
-        } else {
-          return 1 + Math.max( bst.getHeight(node.left), bst.getHeight(node.right) );
-        }
+        if (node.left === null && node.right === null) return 0;
+        if (node.left === null) return 1 + bst.getHeight(node.right);
+        if (node.right === null) return 1 + bst.getHeight(node.left);
+        return 1 + Math.max( bst.getHeight(node.left), bst.getHeight(node.right) );
       }
     };
 
