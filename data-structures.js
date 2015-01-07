@@ -211,49 +211,24 @@
       }
     };
 
-    bst.remove = function ( value, node ) {
-      var minValue;
+    bst.remove = function (value) {
+      bst.root = _removeInner( value, bst.root );
+    };
 
-      if ( !bst.isEmpty() ) {
-        // initialize node
-        if ( node === void 0 ) node = bst.root;
-
+    var _removeInner = function (value, node) {
+      if ( node ) {
         if ( value < node.value ) {
-          // check if there are any node's to the left of current node
-          if ( node.left !== null ) node.left = bst.remove( value, node.left );
-
-          /*
-           * The other scenario that can happen here is that node.left === null.
-           * In this case, that means the value we're searching for can't be
-           * found in the tree. Since we're always returning a pointer to a node,
-           * we're just simply returning the node at line 270.
-          */
+          node.left = bst._removeInner( value, node.left );
         } else if ( value > node.value ) {
-          // check if there are any node's to the right of current node
-          if ( node.right !== null ) node.right = bst.remove( value, node.right );
+          node.right = bst._removeInner( value, node.right );
+        } else if ( node.left && node.right ) {
+          node.value = bst.findMinValue( node.right );
+          node.right = bst._removeInner( node.value, node.right );
         } else {
-          // node.value === value
-
-          // check if current node is leaf node
-          if ( node.left === null && node.right === null ) {
-            if ( bst.getHeight( node ) === 0 ) {
-              bst.root = null;
-              return null;
-            } else {
-              node = null;
-            }
-          } else if ( node.left === null ) {
-            node = node.right;
-          } else if ( node.right === null ) {
-            node = node.left;
-          } else {
-            minValue   = bst.findMin( node.right );
-            node.value = minValue;
-            node.right = bst.remove( minValue, node.right );
-          }
+          node = node.left || node.right;
         }
-        return node;
       }
+      return node;
     };
 
     bst.contains = function (value, node) {
