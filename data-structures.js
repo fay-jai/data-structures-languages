@@ -245,13 +245,8 @@
               node = null;
             }
           } else if (node.left === null) {
-            rightValue = node.right.value;
-            node.value = rightValue;
-            node.right = bst.remove( rightValue, node.right );
+            node = node.right;
           } else if (node.right === null) {
-            leftValue  = node.left.value;
-            node.value = leftValue;
-            node.left  = bst.remove( leftValue, node.left );
             node = node.left;
           } else {
             minValue   = bst.findMin(node.right);
@@ -259,7 +254,6 @@
             node.right = bst.remove( minValue, node.right );
           }
         }
-
         return node;
       }
     };
