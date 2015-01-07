@@ -11,6 +11,7 @@ For now, the data structures included in this project are:
 5. Binary Search Tree
 6. Hash Table
 7. Graph
+8. Set
 
 ### How to Use ###
 1. Include the 'data-structures.js' file in your application.

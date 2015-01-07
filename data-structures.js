@@ -433,6 +433,41 @@
 
   };
 
+  _ds.set = function () {
+    var s     = {};
+    s.storage = {};
+
+    s.add = function (value) {
+
+    };
+
+    s.remove = function (value) {
+
+    };
+
+    s.size = function () {
+
+    };
+
+    s.union = function (otherSet) {
+
+    };
+
+    s.intersect = function (otherSet) {
+
+    };
+
+    s.isSubset = function (otherSet) {
+
+    };
+
+    s.difference = function (otherSet) {
+
+    };
+
+    return s;
+  };
+
   _tt.depthFirstSearch = function (treeNode, fn) {
     fn = fn || function (x) { console.log(x); };
 
