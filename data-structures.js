@@ -391,8 +391,63 @@
     return h;
   };
 
-  _ds.graph = function () {
+  _ds.graph = function (v) {
+    // v is an array of vertices, where the vertice's value will be used to represent it
+    var g         = {};
+    g.vertex      = v;
+    g.visited     = {};
+    g.edges       = {};
+    g.numVertices = v.length;
+    g.numEdges    = 0;
 
+
+    v.forEach(function (vertex) {
+      g.edges[ vertex.value ] = g.edges[ vertex.value ] || [];
+      g.visited[ vertex.value ] = false;
+    });
+
+    g.addEdge = function (vertex1, vertex2) {
+      // check if both vertex1 and vertex2 are in the graph
+      var v1Found = false;
+      var v2Found = false;
+      var i;
+
+      for ( i = 0; i < g.vertex.length; i += 1 ) {
+        if ( vertex1.value === g.vertex[i] ) {
+          v1Found = true;
+        } else if ( vertex2.value === g.vertex[i] ) {
+          v2Found = true;
+        }
+      }
+
+      // vertex1 is not found
+      if ( !v1Found ) {
+        g.vertex.push( vertex1 );
+        g.numVertices += 1;
+        g.visted[ vertex1.value ] = false;
+        g.edges[ vertex1.value ] = [];
+      }
+
+      // vertex2 is not found
+      if ( !v2Found ) {
+        g.vertex.push( vertex2 );
+        g.numVertices += 1;
+        g.visted[ vertex2.value ] = false;
+        g.edges[ vertex2.value ] = [];
+      }
+
+      g.edges[ vertex1.value ].push( vertex2.value );
+      g.edges[ vertex2.value ].push( vertex1.value );
+      g.numEdges += 1;
+    };
+
+    return g;
+  };
+
+  var makeVertex = function (value) {
+    return {
+      value   : value
+    };
   };
 
   _ds.set = function () {
