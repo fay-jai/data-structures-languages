@@ -2,7 +2,7 @@
   var _ds = {};
   var _tt = {};
 
-  var makeNode = function (value) {
+  var linkedListNode = function (value) {
     var node = {
       value : value,
       next  : null
@@ -19,13 +19,19 @@
     return node;
   };
 
+  var makeVertex = function (value) {
+    return {
+      value   : value
+    };
+  };
+
   _ds.linkedList = function () {
     var list = {};
     list.head = null;
     list.tail = null;
 
     list.addToHead = function (value) {
-      var newNode = makeNode( value );
+      var newNode = linkedListNode( value );
       // if empty, set head and tail to new node
       if ( list.isEmpty() ) {
         list.head = newNode;
@@ -38,7 +44,7 @@
     };
 
     list.addToTail = function (value) {
-      var newNode = makeNode( value );
+      var newNode = linkedListNode( value );
       if ( list.isEmpty() ) {
         list.head = newNode;
         list.tail = newNode;
@@ -471,12 +477,6 @@
     };
 
     return g;
-  };
-
-  var makeVertex = function (value) {
-    return {
-      value   : value
-    };
   };
 
   _ds.set = function () {
