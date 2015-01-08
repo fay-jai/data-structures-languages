@@ -483,32 +483,91 @@
     var s     = {};
     s.storage = {};
 
-    s.add = function (value) {
+    s.add = function () {
+      var args = Array.prototype.slice.call( arguments );
+      var i;
 
+      for ( i = 0; i < args.length; i += 1 ) {
+        if ( !s.storage[ args[i] ] ) s.storage[ args[i] ] = true;
+      }
     };
 
-    s.remove = function (value) {
+    s.remove = function () {
+      var args = Array.prototype.slice.call( arguments );
+      var i;
 
+      for ( i = 0; i < args.length; i += 1 ) {
+        if ( s.storage[ args[i] ] ) delete s.storage[ args[i] ];
+      }
     };
 
     s.size = function () {
-
+      return Object.keys( s.storage ).length;
     };
 
     s.union = function (otherSet) {
+      var newSet = set();
+      var obj    = {};
+      var prop;
 
+      for ( prop in s.storage ) {
+        obj[ prop ] = s.storage[ prop ];
+      }
+
+      for ( prop in otherSet.storage ) {
+        obj[ prop ] = otherSet.storage[ prop ];
+      }
+
+      newSet.storage = obj;
+      return newSet;
     };
 
     s.intersect = function (otherSet) {
+      var newSet = set();
+      var obj    = {};
+      var prop;
 
+      for ( prop in s.storage ) {
+        obj[ prop ] = s.storage[ prop ];
+      }
+
+      for ( prop in obj ) {
+        if ( !otherSet.storage[ prop ] ) {
+          delete obj[ prop ];
+        }
+      }
+
+      newSet.storage = obj;
+      return newSet;
     };
 
     s.isSubset = function (otherSet) {
-
+      for ( var prop in s.storage ) {
+        if ( !otherSet.storage[ prop ] ) {
+          return false;
+        }
+      }
+      return true;
     };
 
     s.difference = function (otherSet) {
+      // equivalent to s - otherSet
+      var newSet = set();
+      var obj    = {};
+      var prop;
 
+      for ( prop in s.storage ) {
+        obj[ prop ] = s.storage[ prop ];
+      }
+
+      for ( prop in otherSet.storage ) {
+        if ( obj[ prop ] ) {
+          delete obj[ prop ];
+        }
+      }
+
+      newSet.storage = obj;
+      return newSet;
     };
 
     return s;
