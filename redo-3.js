@@ -8,6 +8,7 @@
  * Hash Table
 */
 
+// Nodes
 var SinglyLinkedListNode = function (value) {
   return {
     value : value,
@@ -37,3 +38,75 @@ var BinaryTreeNode = function (value) {
     right : null
   };
 };
+
+// Singly Linked List
+var SinglyLinkedList = function () {
+  var obj  = Object.create( SinglyLinkedListMethods );
+  obj.head = null;
+  obj.tail = null;
+  return obj;
+};
+
+var SinglyLinkedListMethods = {
+  appendToHead: function (node) {
+
+  },
+  appendToTail: function (node) {
+
+  },
+  removeFromHead: function () {
+
+  },
+  removeFromTail: function () {
+
+  },
+  contains: function (node) {
+
+  },
+  isEmpty: function () {
+
+  }
+};
+
+// Doubly Linked List
+var DoublyLinkedList = function () {
+  var obj  = Object.create( DoublyLinkedListMethods );
+  obj.head = null;
+  obj.tail = null;
+  return obj;
+};
+
+var DoublyLinkedListMethods = {
+  appendToHead: function (node) {
+
+  },
+  appendToTail: function (node) {
+
+  },
+  removeFromHead: function () {
+
+  },
+  removeFromTail: function () {
+
+  },
+  contains: function (node) {
+
+  },
+  isEmpty: function () {
+
+  }
+};
+
+// Stack
+
+
+// Queue
+
+
+// Tree
+
+
+// Binary Search Tree
+
+
+// Hash Table
