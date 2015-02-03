@@ -148,6 +148,60 @@ var QueueMethods = {
 
 
 // Binary Search Tree
+var BinarySearchTree = function () {
+  var obj  = Object.create( BinarySearchTreeMethods );
+  obj.root = null;
+  return obj;
+};
 
+var BinarySearchTreeMethods = (function () {
+  var insert = function (node) {
+
+  };
+
+  var remove = function (node) {
+
+  };
+
+  var contains = function (node) {
+
+  };
+
+  var findMinNode = function () {
+
+  };
+
+  var findMaxNode = function () {
+
+  };
+
+  var getHeight = function () {
+
+  };
+
+  var isEmpty = function () {
+
+  };
+
+  var dfs = function (callback) {
+
+  };
+
+  var bfs = function (callback) {
+
+  };
+
+  return {
+    insert      : insert,
+    remove      : remove,
+    contains    : contains,
+    findMinNode : findMinNode,
+    findMaxNode : findMaxNode,
+    getHeight   : getHeight,
+    isEmpty     : isEmpty,
+    dfs         : dfs,
+    bfs         : bfs
+  };
+})();
 
 // Hash Table
