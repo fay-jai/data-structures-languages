@@ -205,3 +205,30 @@ var BinarySearchTreeMethods = (function () {
 })();
 
 // Hash Table
+var HashTable = function (arrayLimit) {
+  var obj          = Object.create( HashTableMethods );
+  obj.storage      = [];
+  obj.storageLimit = arrayLimit;
+  return obj;
+};
+
+var HashTableMethods = {
+  insert: function (key, value) {
+
+  },
+  retrieve: function (key) {
+
+  },
+  remove: function (key) {
+
+  },
+  getIndexBelowMaxForKey: function (str, max) {
+    var hash = 0;
+    for (var i = 0; i < str.length; i++) {
+      hash = (hash<<5) + hash + str.charCodeAt(i);
+      hash = hash & hash; // Convert to 32bit integer
+      hash = Math.abs(hash);
+    }
+    return hash % max;
+  }
+};
