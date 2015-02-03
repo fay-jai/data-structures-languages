@@ -121,7 +121,28 @@ var StackMethods = {
 };
 
 // Queue
+var Queue = function () {
+  var obj     = Object.create( QueueMethods );
+  obj.storage = {};
+  obj.start   = 0;
+  obj.end     = 0;
+  return obj;
+};
 
+var QueueMethods = {
+  enqueue: function (value) {
+
+  },
+  dequeue: function () {
+
+  },
+  top: function () {
+
+  },
+  isEmpty: function () {
+
+  }
+};
 
 // Tree
 
