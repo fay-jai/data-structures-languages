@@ -98,7 +98,27 @@ var DoublyLinkedListMethods = {
 };
 
 // Stack
+var Stack = function () {
+  var obj     = Object.create( StackMethods );
+  obj.storage = {};
+  obj.size    = 0;
+  return obj;
+};
 
+var StackMethods = {
+  push: function (value) {
+
+  },
+  pop: function () {
+
+  },
+  peek: function () {
+
+  },
+  isEmpty: function () {
+
+  }
+};
 
 // Queue
 
