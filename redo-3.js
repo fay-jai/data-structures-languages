@@ -107,19 +107,55 @@ var DoublyLinkedList = function () {
 
 var DoublyLinkedListMethods = {
   appendToHead: function (node) {
-
+    // if linked list is empty
+      // set both head and tail to node
+    // else (linked list is not empty)
+      // make the new node the new head
+      // make the new node's next value point to the previous head
+      // make the previous head's prev value point to new node
   },
   appendToTail: function (node) {
-
+    // if linked list is empty
+      // set both head and tail to node
+    // else (linked list is not empty)
+      // make the new node the new tail
+      // make the previous tail point to the new node
+      // make the new node's previous value point to the previous tail
   },
   removeFromHead: function () {
-
+    // if linked list is empty
+      // don't do anything
+    // else (linked list is not empty)
+      // save head node
+      // if linked list has only one item
+        // reset both head and tail to null
+      // else (linked list has more than one item)
+        // update head.next as the new head value
+        // update the new head's previous value to point to null
+        // update the saved head node's next value to point to null
+      // return saved head node
   },
   removeFromTail: function () {
-
+    // if linked list is empty
+      // don't do anything
+    // else (linked list is not empty)
+      // save tail node
+      // if linked list has only one item
+        // reset both head and tail to null
+      // else (linked list has more than one item)
+        // update tail.prev as the new tail value
+        // update the new tail's next value to point to null
+        // update the saved tail node's prev value to point to null
+      // return saved tail node
   },
   contains: function (node) {
-
+    // if linked list is empty
+      // return false
+    // else (linked list is not empty)
+      // start at the head node and iterate across all nodes
+      // checking if the current node is identically equal to the target node
+        // if at any point it does, return true
+      // after iterating across all nodes, return false
   },
   isEmpty: function () {
     return this.head === null && this.tail === null;
