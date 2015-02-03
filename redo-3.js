@@ -49,22 +49,51 @@ var SinglyLinkedList = function () {
 
 var SinglyLinkedListMethods = {
   appendToHead: function (node) {
-
+    // if linked list is empty
+      // set both head and tail to point to node
+    // else (linked list is not empty)
+      // update head to point to node and head.next to point to previous head
   },
   appendToTail: function (node) {
-
+    // if linked list is empty
+      // set both head and tail to point to node
+    // else (linked list is not empty)
+      // update tail to point to node and tail.prev to point to new tail
   },
   removeFromHead: function () {
-
+    // if linked list is empty
+      // don't do anything
+    // else (linked list is not empty)
+      // save head node
+      // if linked list only has one item
+        // reset both head and tail to null
+      // else  (linked list has more than one item)
+        // assign head to head.next
+        // for saved head node, bind next value to null
+      // return saved head node
   },
   removeFromTail: function () {
-
+    // if linked list is empty
+      // don't do anything
+    // else (linked list is not empty)
+      // save tail node
+      // if linked list only has one item
+        // reset both head and tail to null
+      // else  (linked list has more than one item)
+        // assign tail.prev to tail
+      // return saved tail node
   },
   contains: function (node) {
-
+    // if linked list is empty
+      // return false
+    // else (linked list is not empty)
+      // start at head value and iterate across all nodes in linked list
+      // checking whether each node is equal to the target node
+        // if at any point it is equal, return true
+      // after checking all nodes, return false
   },
   isEmpty: function () {
-
+    return this.head === null && this.tail === null;
   }
 };
 
@@ -93,7 +122,7 @@ var DoublyLinkedListMethods = {
 
   },
   isEmpty: function () {
-
+    return this.head === null && this.tail === null;
   }
 };
 
@@ -116,7 +145,7 @@ var StackMethods = {
 
   },
   isEmpty: function () {
-
+    return this.size <= 0;
   }
 };
 
