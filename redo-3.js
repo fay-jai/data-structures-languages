@@ -325,39 +325,130 @@ var BinarySearchTree = function () {
 
 var BinarySearchTreeMethods = (function () {
   var insert = function (node) {
+    if (this.isEmpty()) {
+      this.root = node;
+    } else {
+      _insert.call( this, this.root, node );
+    }
+  };
 
+  var _insert = function (start, node) {
+    if (start.value <= node.value) {
+      if (start.left) {
+        _insert.call( this, start.left, node );
+      } else {
+        start.left = node;
+      }
+    } else {
+      if (start.right) {
+        _insert.call( this, start.right, node );
+      } else {
+        start.right = node;
+      }
+    }
   };
 
   var remove = function (node) {
 
   };
 
+  var _remove = function (start, node) {
+
+  };
+
   var contains = function (node) {
-
+    return this.isEmpty() ? false : _contains.call( this, this.root, node );
   };
 
-  var findMinNode = function () {
-
+  var _contains = function (start, node) {
+    if (start === null) return false;
+    if (start === node) return true;
+    if (start.value < node.value) return _contains.call( this, start.right, node );
+    return _contains.call( this, start.left, node );
   };
 
-  var findMaxNode = function () {
-
+  var findMinNode = function (start) {
+    if (!this.isEmpty()) {
+      return _findMinNode.call( this, start || this.root );
+    }
   };
 
-  var getHeight = function () {
+  var _findMinNode = function (start) {
+    while (start.left) {
+      start = start.left;
+    }
+    return start;
+  };
 
+  var findMaxNode = function (start) {
+    if (!this.isEmpty()) {
+      return _findMaxNode.call( this, start || this.root );
+    }
+  };
+
+  var _findMaxNode = function (start) {
+    while (start.right) {
+      start = start.right;
+    }
+    return start;
+  };
+
+  var getHeight = function (start) {
+    if (this.isEmpty()) return -1;
+    return _getHeight.call( this, start || this.root ) - 1;
+  };
+
+  var _getHeight = function (start) {
+    if (!start) return 0;
+    return 1 + Math.max( _getHeight.call(this, start.left), _getHeight.call(this, start.right) );
   };
 
   var isEmpty = function () {
-
+    return this.root === null;
   };
 
   var dfs = function (callback) {
+    var fn;
+    if (!this.isEmpty()) {
+      fn = function (node) { return node; };
+      _dfs.call( this, this.root, callback || fn );
+    }
+  };
 
+  var _dfs = function (start, callback) {
+    // inorder traversal
+    if (!start) return;
+    _dfs.call( this, start.left, callback );
+    callback( start );
+    _dfs.call( this, start.right, callback );
   };
 
   var bfs = function (callback) {
+    var fn;
+    if (!this.isEmpty()) {
+      fn = function (node) { return node; };
+      _bfs.call( this, this.root, callback || fn );
+    }
+  };
 
+  var _bfs = function (start, callback) {
+    var q = Queue();
+    var remove;
+
+    q.enqueue( start );
+
+    while (!q.isEmpty()) {
+      remove = q.dequeue();
+      callback( remove );
+
+      if (remove.left) {
+        q.enqueue( remove.left );
+      }
+
+      if (remove.right) {
+        q.enqueue( remove.right );
+      }
+    }
   };
 
   return {
