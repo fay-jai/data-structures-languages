@@ -154,54 +154,98 @@ var DoublyLinkedList = function () {
 var DoublyLinkedListMethods = {
   appendToHead: function (node) {
     // if linked list is empty
+    if (this.isEmpty()) {
       // set both head and tail to node
-    // else (linked list is not empty)
-      // make the new node the new head
+      this.head = node;
+      this.tail = node;
+    } else { // (linked list is not empty)
       // make the new node's next value point to the previous head
+      node.next      = this.head;
       // make the previous head's prev value point to new node
+      this.head.prev = node;
+      // make the new node the new head
+      this.head      = node;
+    }
   },
   appendToTail: function (node) {
     // if linked list is empty
+    if (this.isEmpty()) {
       // set both head and tail to node
-    // else (linked list is not empty)
-      // make the new node the new tail
+      this.head = node;
+      this.tail = node;
+    } else { // (linked list is not empty)
       // make the previous tail point to the new node
+      this.tail.next = node;
       // make the new node's previous value point to the previous tail
+      node.prev = this.tail;
+      // make the new node the new tail
+      this.tail = node;
+    }
   },
   removeFromHead: function () {
     // if linked list is empty
       // don't do anything
-    // else (linked list is not empty)
+    var remove;
+    if (!this.isEmpty()) {
       // save head node
+      remove = this.head;
+
       // if linked list has only one item
+      if (this.head === this.tail) {
         // reset both head and tail to null
-      // else (linked list has more than one item)
+        this.head = null;
+        this.tail = null;
+      } else { // (linked list has more than one item)
         // update head.next as the new head value
         // update the new head's previous value to point to null
         // update the saved head node's next value to point to null
+        this.head = this.head.next;
+        this.head.prev = null;
+      }
       // return saved head node
+      remove.next = null;
+      return remove;
+    }
   },
   removeFromTail: function () {
     // if linked list is empty
       // don't do anything
-    // else (linked list is not empty)
+    var remove;
+    if (!this.isEmpty()) {
       // save tail node
+      remove = this.tail;
+
       // if linked list has only one item
+      if (this.head === this.tail) {
         // reset both head and tail to null
-      // else (linked list has more than one item)
+        this.head = null;
+        this.tail = null;
+      } else { // (linked list has more than one item)
         // update tail.prev as the new tail value
         // update the new tail's next value to point to null
         // update the saved tail node's prev value to point to null
+        this.tail      = this.tail.prev;
+        this.tail.next = null;
+      }
       // return saved tail node
+      remove.prev = null;
+      return remove;
+    }
   },
   contains: function (node) {
     // if linked list is empty
-      // return false
-    // else (linked list is not empty)
-      // start at the head node and iterate across all nodes
-      // checking if the current node is identically equal to the target node
-        // if at any point it does, return true
-      // after iterating across all nodes, return false
+    var start;
+    if (this.isEmpty()) return false;
+
+    // start at the head node and iterate across all nodes
+    start = this.head;
+    // check if the current node is identically equal to the target node
+    while (start) {
+      if (start === node) return true;
+      start = start.next;
+    }
+    // after iterating across all nodes, return false
+    return false;
   },
   isEmpty: function () {
     return this.head === null && this.tail === null;
