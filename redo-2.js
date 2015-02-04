@@ -361,13 +361,13 @@ var BinarySearchTreeMethods = (function () {
     return start;
   };
 
-  var findMaxNode = function () {
+  var findMaxNode = function (start) {
     if (!this.isEmpty()) {
       return _findMaxNode.call( this, start || this.root );
     }
   };
 
-  var _findMaxNode = function () {
+  var _findMaxNode = function (start) {
     while (start.right) {
       start = start.right;
     }
