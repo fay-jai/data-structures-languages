@@ -293,16 +293,23 @@ var Queue = function () {
 
 var QueueMethods = {
   enqueue: function (value) {
-
+    this.storage[ this.end ] = value;
+    this.end += 1;
   },
   dequeue: function () {
-
+    var remove;
+    if (!this.isEmpty()) {
+      remove = this.storage[ this.start ];
+      delete this.storage[ this.start ];
+      this.start += 1;
+      return remove;
+    }
   },
   top: function () {
-
+    return this.storage[ this.start ];
   },
   isEmpty: function () {
-
+    return this.end <= this.start;
   }
 };
 
