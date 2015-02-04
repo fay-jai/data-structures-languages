@@ -325,17 +325,57 @@ var HashTable = function (arrayLimit) {
 
 var HashTableMethods = {
   insert: function (key, value) {
+    var idx    = this.getIndexBelowMaxForKey(key, this.storageLimit);
+    var bucket = this.storage[ idx ] || [];
+    var len    = bucket.length;
+    var i;
 
+    for (i = 0; i < len; i += 1) {
+      // check if the key already exists as an array in bucket
+      if (bucket[i][0] === key) {
+        bucket[i][1] = value;
+        return;
+      }
+    }
+
+    // reaching here implies that the [key, value] pair doesn't exist in bucket
+    bucket.push( [key, value] );
+    this.storage[ idx ] = bucket;
   },
   retrieve: function (key) {
+    var idx    = this.getIndexBelowMaxForKey(key, this.storageLimit);
+    var bucket = this.storage[ idx ] || [];
+    var len    = bucket.length;
+    var i;
 
+    for (i = 0; i < len; i += 1) {
+      if (bucket[i][0] === key) return bucket[i][1];
+    }
+
+    // return null if the key doesn't exist in hash table
+    return null;
   },
   remove: function (key) {
+    var idx    = this.getIndexBelowMaxForKey(key, this.storageLimit);
+    var bucket = this.storage[ idx ] || [];
+    var len    = bucket.length;
+    var i;
 
+    for (i = 0; i < len; i += 1) {
+      if (bucket[i][0] === key) {
+        return bucket.splice(i, 1)[0];
+      }
+    }
+
+    // return null if the key doesn't exist in hash table
+    return null;
   },
   getIndexBelowMaxForKey: function (str, max) {
     var hash = 0;
-    for (var i = 0; i < str.length; i++) {
+    var len  = str.length;
+    var i;
+
+    for (i = 0; i < len; i += 1) {
       hash = (hash<<5) + hash + str.charCodeAt(i);
       hash = hash & hash; // Convert to 32bit integer
       hash = Math.abs(hash);
