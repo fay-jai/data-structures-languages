@@ -349,11 +349,26 @@ var BinarySearchTreeMethods = (function () {
   };
 
   var remove = function (node) {
-
+    if (!this.isEmpty()) {
+      this.root = _remove.call( this, this.root, node );
+    }
   };
 
   var _remove = function (start, node) {
-
+    if (start) {
+      if (node.value < start.value) {
+        start.left = _remove.call( this, start.left, node );
+      } else if (node.value > start.value) {
+        start.right = _remove.call( this, start.right, node );
+      } else if (start.left && start.right) {
+        var minRightNode = findMinNode.call( this, start.right );
+        start.value = minRightNode.value;
+        start.right = _remove.call( this, start.right, minRightNode );
+      } else {
+        start = start.left || start.right;
+      }
+    }
+    return start;
   };
 
   var contains = function (node) {
