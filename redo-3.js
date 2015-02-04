@@ -262,13 +262,20 @@ var Stack = function () {
 
 var StackMethods = {
   push: function (value) {
-
+    this.storage[ this.size ] = value;
+    this.size += 1;
   },
   pop: function () {
-
+    var remove;
+    if (this.size > 0) {
+      remove = this.storage[ this.size - 1 ];
+      delete this.storage[ this.size - 1 ];
+      this.size -= 1;
+      return remove;
+    }
   },
   peek: function () {
-
+    return this.storage[ this.size - 1 ];
   },
   isEmpty: function () {
     return this.size <= 0;
