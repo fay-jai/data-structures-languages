@@ -1,6 +1,6 @@
-## Data Structures in JavaScript ##
+## Data Structures in various languages ##
 
-The purpose behind this project is to provide JavaScript implementations for various common data structures in computer science. In addition to providing implementation details, another goal is to provide enough documentation for students to learn and understand how these data structures work.
+The purpose behind this project is to provide implementations for various common data structures in computer science. In addition to providing implementation details, another goal is to provide enough documentation for students to learn and understand how these data structures work.
 
 For now, the data structures included in this project are:
 
@@ -13,6 +13,11 @@ For now, the data structures included in this project are:
 7. Graph
 8. Set
 
+## Languages ##
+
+1. JavaScript
+2. Ruby
+
 ### How to Use ###
-1. Include the 'data-structures.js' file in your application.
+1. Include the 'javascript/data-structures.js' file in your application.
 2. By including the above file, the object '_ds' will be available in the global environment.

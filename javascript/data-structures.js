@@ -21,7 +21,7 @@
 
   var makeVertex = function (value) {
     return {
-      value   : value
+      value : value
     };
   };
 
@@ -381,9 +381,8 @@
     g.numVertices = v.length;
     g.numEdges    = 0;
 
-
     v.forEach(function (vertex) {
-      g.edges[ vertex.value ] = g.edges[ vertex.value ] || [];
+      g.edges[ vertex.value ] = [];
       g.visited[ vertex.value ] = false;
     });
 
@@ -453,12 +452,14 @@
 
     g.breadthFirstSearch = function (startingVertex, fn) {
       // requires a queue
-
+      var q = _ds.queue();
       // check if starting vertex is in list of vertices
       var vFound = false;
+      var popped, i;
+
       fn = fn || function (value) { console.log( value ); };
 
-      for (var i = 0; i < g.vertex.length; i += 1) {
+      for (i = 0; i < g.vertex.length; i += 1) {
         if ( g.vertex[i].value === startingVertex.value ) {
           vFound = true;
           break;
@@ -466,8 +467,25 @@
       }
 
       if ( vFound ) {
+        q.enqueue( startingVertex );
+        g.visited[ startingVertex.value ] = true;
 
+        while ( !q.isEmpty() ) {
+          popped = q.dequeue();
+          fn(popped);
+
+          g.edges[popped.value].forEach(function (vertex) {
+            if (!g.visited[ vertex.value ]) {
+              q.enqueue( vertex );
+              g.visited[ vertex.value ] = true;  
+            }
+          });
+
+        }
       }
+
+      // reset g.visited
+      g.resetVisited();
     };
 
     g.resetVisited = function () {
