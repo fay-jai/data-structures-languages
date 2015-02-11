@@ -145,32 +145,59 @@ class Binary_Search_Tree
   end
 
   def add(node)
-
+    # add node to @root if @root is empty
+    # else add node to end of previous node
   end
 
   def remove(node)
-
+    # traverse through binary search tree and remove first occurence of target node
   end
 
   def contains?(node)
-
+    # return true or false depending on whether binary search tree contains target node
   end
 
   def find_min_node
-
+    # return the node with the minimum value
   end
 
   def find_max_node
-
+    # return the node with the maximum value
   end
 
-  def get_height
-
+  def get_depth
+    # return the depth or -1
   end
 
   def is_empty?
     @root == nil
   end
+
+  def _add(start, node)
+
+  end
+
+  def _remove(start, node)
+
+  end
+
+  def _contains(start, node)
+
+  end
+
+  def _find_min_node(start)
+
+  end
+
+  def _find_max_node(start)
+
+  end
+
+  def _get_depth(start)
+
+  end
+
+  private :_add, :_remove, :_contains, :_find_min_node, :_find_max_node, :_get_depth
 end
 
 
