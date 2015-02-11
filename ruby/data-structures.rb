@@ -104,7 +104,7 @@ class Singly_Linked_List
       else
         # set up a loop that starts at @head and stops at the node prior to @tail
         start = @head
-        until start.next == @tail do
+        until start.next == @tail
           start = start.next
         end
         # set that node as the new tail
@@ -124,7 +124,7 @@ class Singly_Linked_List
     return false if is_empty?
 
     start = @head
-    until start == nil do
+    until start == nil
       # set up a loop that starts at @head and compares each node with target node
       # if the two nodes are identically equal, return true
       return true if start == node
@@ -214,7 +214,7 @@ class Doubly_Linked_List
     return false if is_empty?
 
     start = @head
-    until start == nil do
+    until start == nil
       return true if start == node
       start = start.next
     end
@@ -360,6 +360,18 @@ class Binary_Search_Tree
     @root == nil
   end
 
+  def depth_first_search(&callback)
+    if not is_empty?
+      _depth_first_search @root, &callback
+    end
+  end
+
+  def breadth_first_search(&callback)
+    if not is_empty?
+      _breadth_first_search @root, &callback
+    end
+  end
+
   def _add(start, node)
     if node.value <= start.value
       if start.left
@@ -401,14 +413,14 @@ class Binary_Search_Tree
   end
 
   def _find_min_node(start)
-    until start.left == nil do
+    until start.left == nil
       start = start.left
     end
     start
   end
 
   def _find_max_node(start)
-    until start.right == nil do
+    until start.right == nil
       start = start.right
     end
     start
@@ -419,7 +431,33 @@ class Binary_Search_Tree
     return 1 + [ _get_depth(start.left) , _get_depth(start.right) ].max
   end
 
-  private :_add, :_remove, :_contains?, :_find_min_node, :_find_max_node, :_get_depth
+  def _depth_first_search(start, &callback)
+    # in order traversal
+    return nil if start == nil
+
+    _depth_first_search start.left, &callback
+    callback.call start
+    _depth_first_search start.right, &callback
+
+    return nil
+  end
+
+  def _breadth_first_search(start, &callback)
+    q = Queue.new
+    q.enqueue start
+
+    until q.is_empty?
+      remove = q.dequeue
+      callback.call remove
+
+      q.enqueue(remove.left)  if remove.left
+      q.enqueue(remove.right) if remove.right
+    end
+
+    return nil
+  end
+
+  private :_add, :_remove, :_contains?, :_find_min_node, :_find_max_node, :_get_depth, :_depth_first_search, :_breadth_first_search
 end
 
 
