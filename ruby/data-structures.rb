@@ -377,18 +377,53 @@ class Hash_Table
 
   def insert(key, value)
     # determine idx to add [key, value] within @storage
+    idx    = hash_function(key, @size_limit)
+    bucket = @storage[ idx ] || []
+    len    = bucket.length
+
+    for i in 0...len do
+      if bucket[ i ][ 0 ] == key
+        bucket[i][1] = value
+        return value
+      end
+    end
+
     # add new array into @storage or modify existing array with new value
+    bucket.push( [key, value] )
+    @storage[ idx ] = bucket
+    return value
   end
 
   def retrieve(key)
+    idx    = hash_function(key, @size_limit)
+    bucket = @storage[ idx ] || []
+    len    = bucket.length
+
     # return value at key if it exists
-    # else return nil
+    for i in 0...len do
+      if bucket[ i ][ 0 ] == key
+        return bucket[i][1]
+      end
+    end
+
+    return nil
   end
 
   def remove(key)
-    # look for key within @storage
-    # if it exists, remove the [key, value] pair from @storage at specific idx and return [key, value] pair
-    # else return nil
+    idx    = hash_function(key, @size_limit)
+    bucket = @storage[ idx ] || []
+    len    = bucket.length
+
+    for i in 0...len do
+      # look for key within @storage
+      if bucket[ i ][ 0 ] == key
+        # if it exists, remove the [key, value] pair from @storage at specific idx and return [key, value] pair
+        remove = bucket.slice!(i, 1)[0]
+        return remove
+      end
+    end
+
+    return nil
   end
 
   def hash_function(string, max)
