@@ -307,33 +307,53 @@ end
 
 # Binary Search Tree
 class Binary_Search_Tree
+  attr_reader :root
+
   def initialize
     @root = nil
   end
 
   def add(node)
     # add node to @root if @root is empty
-    # else add node to end of previous node
+    if is_empty?
+      @root = node
+    else
+      _add @root, node
+    end
+
+    node
   end
 
   def remove(node)
     # traverse through binary search tree and remove first occurence of target node
+    return nil if is_empty?
+
+    @root = _remove @root, node
+    return @root
   end
 
   def contains?(node)
     # return true or false depending on whether binary search tree contains target node
+    return false if is_empty?
+    _contains? @root, node
   end
 
   def find_min_node
     # return the node with the minimum value
+    return nil if is_empty?
+    _find_min_node @root
   end
 
   def find_max_node
     # return the node with the maximum value
+    return nil if is_empty?
+    _find_max_node @root
   end
 
   def get_depth
     # return the depth or -1
+    return -1 if is_empty?
+    _get_depth(@root) - 1
   end
 
   def is_empty?
@@ -341,30 +361,65 @@ class Binary_Search_Tree
   end
 
   def _add(start, node)
-
+    if node.value <= start.value
+      if start.left
+        _add start.left, node
+      else
+        start.left = node
+      end
+    else
+      if start.right
+        _add start.right, node
+      else
+        start.right = node
+      end
+    end
   end
 
   def _remove(start, node)
-
+    if start
+      if node.value < start.value
+        start.left = _remove start.left, node
+      elsif node.value > start.value
+        start.right = _remove start.right, node
+      elsif start.left && start.right
+        min_right = _find_min_node start.right
+        start.value = min_right.value
+        start.right = _remove start.right, min_right
+      else
+        start = start.left || start.right
+      end
+    end
+    return start
   end
 
-  def _contains(start, node)
-
+  def _contains?(start, node)
+    return false if start == nil
+    return true  if start == node
+    return _contains? start.left, node if node.value <= start.value
+    _contains? start.right, node
   end
 
   def _find_min_node(start)
-
+    until start.left == nil do
+      start = start.left
+    end
+    start
   end
 
   def _find_max_node(start)
-
+    until start.right == nil do
+      start = start.right
+    end
+    start
   end
 
   def _get_depth(start)
-
+    return 0 if start == nil
+    return 1 + [ _get_depth(start.left) , _get_depth(start.right) ].max
   end
 
-  private :_add, :_remove, :_contains, :_find_min_node, :_find_max_node, :_get_depth
+  private :_add, :_remove, :_contains?, :_find_min_node, :_find_max_node, :_get_depth
 end
 
 
