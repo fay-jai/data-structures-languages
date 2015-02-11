@@ -7,7 +7,7 @@ class Singly_Node
   end
 end
 
-class Doubly_Node < SinglyNode
+class Doubly_Node < Singly_Node
   attr_accessor :prev
 
   def initialize(value)
@@ -28,33 +28,114 @@ end
 
 # Singly Linked List
 class Singly_Linked_List
+  attr_reader :head, :tail
+
   def initialize
     @head = nil
     @tail = nil
   end
 
+  # modifies linked list to add node as head
   def append_to_head(node)
-    # modifies linked list to add node as head
+    # if linked list is empty
+    if is_empty?
+      # set head and tail to node
+      @head = node
+      @tail = node
+    else
+      # set new node's next value to current head
+      node.next = @head
+      # set new node as new head
+      @head     = node
+    end
   end
 
+  # modifies linked list to add node as tail
   def append_to_tail(node)
-    # modifies linked list to add node as tail
+    # if linked list is empty
+    if is_empty?
+      # set head and tail to node
+      @head = node
+      @tail = node
+    else
+      # set current tail's next value to node
+      @tail.next = node
+      # set node as new tail
+      @tail      = node
+    end
   end
 
+  # modifies linked list by removing node from head and returning node
   def remove_from_head
-    # modifies linked list by removing node from head and returning node
+    # if linked list is not empty
+    if not is_empty?
+      # save a reference to the head node
+      remove = @head
+
+      # if linked list only has one item
+      if @head == @tail
+        # set both head and tail to nil
+        @head = nil
+        @tail = nil
+      else
+        # set new head as current head's next value
+        @head = @head.next
+      end
+
+      # set reference's next value to nil
+      remove.next = nil
+      # return saved node
+      return remove
+    end
   end
 
+  # modifies linked list by removing node from tail and returning node
   def remove_from_tail
-    # modifies linked list by removing node from tail and returning node
+    # if linked list is not empty
+    if not is_empty?
+      # save reference to tail node
+      remove = @tail
+
+      # if linked list has one item
+      if @head == @tail
+        # set both head and tail to nil
+        @head = nil
+        @tail = nil
+      else
+        # set up a loop that starts at @head and stops at the node prior to @tail
+        start = @head
+        until start.next == @tail do
+          start = start.next
+        end
+        # set that node as the new tail
+        @tail      = start
+        # point new tail's next value to nil
+        @tail.next = nil
+      end
+      # return saved node
+      return remove
+    end
   end
 
+  # returns true or false depending on whether linked list contains target node
   def contains?(node)
-    # returns true or false depending on whether linked list contains target node
+    # if linked list is empty
+      # return false
+    return false if is_empty?
+
+    start = @head
+    until start == nil do
+      # set up a loop that starts at @head and compares each node with target node
+      # if the two nodes are identically equal, return true
+      return true if start == node
+      start = start.next
+    end
+    # reaching here means that target node is not found in linked list, return false
+    return false
   end
 
+  # returns true or false depending on whether linked list contains any nodes
   def is_empty?
-    # returns true or false depending on whether linked list contains any nodes
     @head == nil && @tail == nil
   end
 end
