@@ -237,15 +237,27 @@ class Stack
 
   def push(value)
     # add value to @storage and increment @size
+    @storage[ @size ] = value
+    @size += 1
+
+    return value
   end
 
   def pop
-    # remove item in @storage at index @size - 1 and return the removed item
-    # be sure to delete the item from @storage
+    if not is_empty?
+      # remove item in @storage at index @size - 1 and return the removed item
+      remove = @storage[ @size - 1 ]
+      @storage.delete(@size - 1)
+      @size -= 1
+
+      return remove
+    end
+
   end
 
   def peek
     # return a reference to the value at @storage's @size - 1 index
+    @storage[ @size - 1 ]
   end
 
   def is_empty?
@@ -265,12 +277,31 @@ class Queue
 
   def enqueue(value)
     # add value to @storage at index @end
+    @storage[ @end ] = value
     # increment @end value
+    @end += 1
+
+    return value
   end
 
   def dequeue
-    # remove item from @storage at index @start
-    # increment @start value
+    if not is_empty?
+      # remove item from @storage at index @start
+      remove = @storage[ @start ]
+      @storage.delete @start
+      # increment @start value
+      @start += 1
+
+      return remove
+    end
+  end
+
+  def top
+    @storage[ @start ]
+  end
+
+  def is_empty?
+    @start >= @end
   end
 end
 
