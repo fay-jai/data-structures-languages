@@ -142,33 +142,88 @@ end
 
 # Doubly Linked List
 class Doubly_Linked_List
+  attr_reader :head, :tail
+
   def initialize
     @head = nil
     @tail = nil
   end
 
+  # modifies linked list to add node as head
   def append_to_head(node)
-    # modifies linked list to add node as head
+    if is_empty?
+      @head = node
+      @tail = node
+    else
+      node.next  = @head
+      @head.prev = node
+      @head      = node
+    end
   end
 
+  # modifies linked list to add node as tail
   def append_to_tail(node)
-    # modifies linked list to add node as tail
+    if is_empty?
+      @head = node
+      @tail = node
+    else
+      node.prev  = @tail
+      @tail.next = node
+      @tail      = node
+    end
   end
 
+  # modifies linked list by removing node from head and returning node
   def remove_from_head
-    # modifies linked list by removing node from head and returning node
+    if not is_empty?
+      remove = @head
+
+      if @head == @tail
+        @head = nil
+        @tail = nil
+      else
+        @head      = @head.next
+        @head.prev = nil
+      end
+
+      remove.next = nil
+      return remove
+    end
   end
 
+  # modifies linked list by removing node from tail and returning node
   def remove_from_tail
-    # modifies linked list by removing node from tail and returning node
+    if not is_empty?
+      remove = @tail
+
+      if @head == @tail
+        @head = nil
+        @tail = nil
+      else
+        @tail      = @tail.prev
+        @tail.next = nil
+      end
+
+      remove.prev = nil
+      return remove
+    end
   end
 
+  # returns true or false depending on whether linked list contains target node
   def contains?(node)
-    # returns true or false depending on whether linked list contains target node
+    return false if is_empty?
+
+    start = @head
+    until start == nil do
+      return true if start == node
+      start = start.next
+    end
+
+    return false
   end
 
+  # returns true or false depending on whether linked list contains any nodes
   def is_empty?
-    # returns true or false depending on whether linked list contains any nodes
     @head == nil && @tail == nil
   end
 end
