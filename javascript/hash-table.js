@@ -7,15 +7,49 @@ var hashTable = function (sizeLimit) {
 
 var hashTableMethods = (function () {
   var insert = function (key, value) {
+    var idx    = this.hashFunction(key, this.sizeLimit);
+    var bucket = this.storage[ idx ] || [];
+    var len    = bucket.length;
+    var i;
 
+    for (i = 0; i < len; i += 1) {
+      if (bucket[i][0] === key) {
+        bucket[i][1] = value;
+        return;
+      }
+    }
+
+    bucket.push( [key, value] );
+    this.storage[ idx ] = bucket;
   };
 
   var retrieve = function (key) {
+    var idx    = this.hashFunction(key, this.sizeLimit);
+    var bucket = this.storage[ idx ] || [];
+    var len    = bucket.length;
+    var i;
 
+    for (i = 0; i < len; i += 1) {
+      if (bucket[i][0] === key) return bucket[i][1];
+    }
+
+    return null;
   };
 
   var remove = function (key) {
+    var idx    = this.hashFunction(key, this.sizeLimit);
+    var bucket = this.storage[ idx ] || [];
+    var len    = bucket.length;
+    var i, remove;
 
+    for (i = 0; i < len; i += 1) {
+      if (bucket[i][0] === key) {
+        remove = bucket.splice(i, 1)[0];
+        return remove;
+      }
+    }
+
+    return null;
   };
 
   var hashFunction = function (str, max) {
