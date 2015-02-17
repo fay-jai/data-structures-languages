@@ -7,7 +7,7 @@ var hashTable = function (sizeLimit) {
 
 var hashTableMethods = (function () {
   var insert = function (key, value) {
-    var idx    = this.hashFunction(key, this.sizeLimit);
+    var idx    = hashFunction(key, this.sizeLimit);
     var bucket = this.storage[ idx ] || [];
     var len    = bucket.length;
     var i;
@@ -24,7 +24,7 @@ var hashTableMethods = (function () {
   };
 
   var retrieve = function (key) {
-    var idx    = this.hashFunction(key, this.sizeLimit);
+    var idx    = hashFunction(key, this.sizeLimit);
     var bucket = this.storage[ idx ] || [];
     var len    = bucket.length;
     var i;
@@ -37,7 +37,7 @@ var hashTableMethods = (function () {
   };
 
   var remove = function (key) {
-    var idx    = this.hashFunction(key, this.sizeLimit);
+    var idx    = hashFunction(key, this.sizeLimit);
     var bucket = this.storage[ idx ] || [];
     var len    = bucket.length;
     var i, remove;
